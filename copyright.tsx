@@ -7,16 +7,6 @@ const currentYear = new Date().getFullYear();
  * Component override for displaying copyright information with customizable text and options.
  * *from veeuix*
  * [License](https://www.twitter.com/veeuix)
- * 
- * @param {Object} props - Component props.
- * @param {string} props.color - Text color.
- * @param {Object} props.font - Font settings.
- * @param {number} props.gap - Gap between elements.
- * @param {boolean} props.hasString - Whether to show additional text.
- * @param {string} props.text - Additional text to display.
- * @param {string} props.togglePosition - Position of additional text ('L' for left, 'R' for right).
- * @param {string} props.yearOption - Year display option ('single' or 'range').
- * @param {number} props.startYear - Starting year for range display.
  */
 export function Copyright(props) {
     const {
@@ -155,3 +145,4 @@ addPropertyControls(Copyright, {
         displayTextAlignment: false,
     },
 });
+
