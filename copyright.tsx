@@ -4,10 +4,11 @@
  * [License](https://www.twitter.com/veeuix)
  */
 
-import * as React from "react"
-import { addPropertyControls, ControlType } from "framer"
+import * as React from "react";
+import { addPropertyControls, ControlType } from "framer";
+import { useFontControls, fontControls, fontStack } from "https://framer.com/m/framer/default-utils.js@^0.45.0";
 
-const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear();
 
 export function Copyright(props) {
     const {
@@ -19,10 +20,12 @@ export function Copyright(props) {
         togglePosition,
         yearOption,
         startYear,
-    } = props
+    } = props;
+
+    const fontStyles = useFontControls(props);
 
     const yearDisplay =
-        yearOption === "single" ? currentYear : `${startYear}–${currentYear}`
+        yearOption === "single" ? currentYear : `${startYear}–${currentYear}`;
 
     const containerStyle = {
         width: "100%",
@@ -32,15 +35,11 @@ export function Copyright(props) {
         margin: "0",
         justifyContent: togglePosition === "L" ? "flex-start" : "flex-end",
         color: color,
-        fontFamily: font.fontFamily,
-        fontSize: `${font.fontSize}px`, // Ensure font size is in pixels
-        fontWeight: font.fontWeight,
-        lineHeight: `${font.lineHeight}px`, // Ensure line height is in pixels
-        letterSpacing: font.letterSpacing,
         userSelect: "none",
         gap: hasString ? gap : 0,
         whiteSpace: "nowrap",
-    }
+        ...fontStyles,
+    };
 
     return (
         <div style={containerStyle}>
@@ -59,7 +58,7 @@ export function Copyright(props) {
                 </p>
             )}
         </div>
-    )
+    );
 }
 
 Copyright.defaultProps = {
@@ -77,7 +76,7 @@ Copyright.defaultProps = {
     togglePosition: "L",
     yearOption: "single",
     startYear: 2018,
-}
+};
 
 addPropertyControls(Copyright, {
     hasString: {
@@ -132,29 +131,5 @@ addPropertyControls(Copyright, {
         title: "Color",
         defaultValue: "#fff",
     },
-    font: {
-        type: ControlType.Object,
-        title: "Font",
-        defaultValue: {
-            fontFamily: "Inter",
-            fontSize: 24,
-            fontWeight: "normal",
-            lineHeight: 1.2,
-            letterSpacing: 0,
-        },
-        controls: {
-            fontFamily: { type: ControlType.String, title: "Font Family" },
-            fontSize: { type: ControlType.Number, title: "Font Size", min: 1 },
-            fontWeight: { type: ControlType.String, title: "Font Weight" },
-            lineHeight: {
-                type: ControlType.Number,
-                title: "Line Height",
-                min: 1,
-            },
-            letterSpacing: {
-                type: ControlType.Number,
-                title: "Letter Spacing",
-            },
-        },
-    },
-})
+    ...fontControls,
+});
