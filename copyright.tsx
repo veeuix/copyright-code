@@ -4,7 +4,6 @@
  * [License](https://www.twitter.com/veeuix)
  */
 
-
 import * as React from "react"
 import { addPropertyControls, ControlType } from "framer"
 
@@ -163,7 +162,7 @@ addPropertyControls(Copyright, {
     lineHeight: {
         type: ControlType.Number,
         title: "Line Height",
-        defaultValue: 24,
+        defaultValue: 20,
         min: 1,
         step: 1,
     },
@@ -176,7 +175,7 @@ addPropertyControls(Copyright, {
     },
     fontWeightStyle: {
         type: ControlType.Enum,
-        title: "Font Weight & Style",
+        title: "Font Weight",
         options: [
             "Thin",
             "Extra Light",
@@ -187,16 +186,13 @@ addPropertyControls(Copyright, {
             "Bold",
             "Extra Bold",
             "Black",
-            "Thin Italic",
-            "Extra Light Italic",
-            "Light Italic",
-            "Italic",
-            "Medium Italic",
-            "Semi Bold Italic",
-            "Bold Italic",
-            "Extra Bold Italic",
-            "Black Italic",
         ],
-        defaultValue: "Regular",
+        defaultValue: "Medium",
+    },
+    fontStyle: {
+        type: ControlType.Enum,
+        title: "Font Style",
+        options: ["Normal", "Italic"],
+        defaultValue: "Normal",
     },
 })
