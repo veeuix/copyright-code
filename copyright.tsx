@@ -17,7 +17,7 @@ export function Copyright(props) {
         fontSizeUnit,
         lineHeight,
         lineHeightUnit,
-        fontWeightStyle,
+        fontWeight,
         fontStyle,
         gap,
         hasString,
@@ -41,9 +41,7 @@ export function Copyright(props) {
         fontFamily: fontFamily,
         fontSize: `${fontSize}${fontSizeUnit}`,
         lineHeight: `${lineHeight}${lineHeightUnit}`,
-        fontWeight: fontWeightStyle.includes("italic")
-            ? "normal"
-            : fontWeightStyle,
+        fontWeight: fontWeight, // This should now be applied correctly
         fontStyle: fontStyle,
         userSelect: "none",
         gap: hasString ? gap : 0,
@@ -75,16 +73,16 @@ Copyright.defaultProps = {
     fontFamily: "Inter",
     fontSize: 16,
     fontSizeUnit: "px",
-    lineHeight: 20,
+    lineHeight: 25,
     lineHeightUnit: "px",
-    fontWeightStyle: "normal",
+    fontWeight: "400", // Default value should be numeric or keyword
     fontStyle: "normal",
     gap: 4,
     hasString: true,
-    text: "All rights reserved.",
-    togglePosition: "L",
+    text: "Design Caffeine. All rights reserved",
+    togglePosition: "R",
     yearOption: "single",
-    startYear: 2018,
+    startYear: 2000,
 }
 
 addPropertyControls(Copyright, {
@@ -98,7 +96,7 @@ addPropertyControls(Copyright, {
     text: {
         type: ControlType.String,
         title: "↳ Text",
-        defaultValue: "All rights reserved.",
+        defaultValue: "Design Caffeine. All rights reserved",
         hidden: (props) => !props.hasString,
     },
     togglePosition: {
@@ -129,7 +127,7 @@ addPropertyControls(Copyright, {
     startYear: {
         type: ControlType.Number,
         title: "Start year",
-        defaultValue: 2018,
+        defaultValue: 2000,
         min: 1900,
         max: currentYear,
         step: 1,
@@ -162,7 +160,7 @@ addPropertyControls(Copyright, {
     lineHeight: {
         type: ControlType.Number,
         title: "Line Height",
-        defaultValue: 20,
+        defaultValue: 24,
         min: 1,
         step: 1,
     },
@@ -173,26 +171,37 @@ addPropertyControls(Copyright, {
         defaultValue: "px",
         displaySegmentedControl: true,
     },
-    fontWeightStyle: {
+    fontWeight: {
         type: ControlType.Enum,
         title: "Font Weight",
         options: [
-            "Thin",
-            "Extra Light",
-            "Light",
-            "Regular",
-            "Medium",
-            "SemiBold",
-            "Bold",
-            "Extra Bold",
-            "Black",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
         ],
-        defaultValue: "Medium",
+        optionTitles: [
+            "Thin (100)",
+            "Extra Light (200)",
+            "Light (300)",
+            "Regular (400)",
+            "Medium (500)",
+            "SemiBold (600)",
+            "Bold (700)",
+            "Extra Bold (800)",
+            "Black (900)",
+        ],
+        defaultValue: "400",
     },
     fontStyle: {
         type: ControlType.Enum,
         title: "Font Style",
-        options: ["Normal", "Italic"],
-        defaultValue: "Normal",
+        options: ["normal", "italic"],
+        defaultValue: "normal",
     },
 })
