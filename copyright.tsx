@@ -4,28 +4,32 @@
  * [License](https://www.twitter.com/veeuix)
  */
 
-import * as React from "react";
-import { addPropertyControls, ControlType } from "framer";
-import { useFontControls, fontControls, fontStack } from "https://framer.com/m/framer/default-utils.js@^0.45.0";
 
-const currentYear = new Date().getFullYear();
+import * as React from "react"
+import { addPropertyControls, ControlType } from "framer"
+
+const currentYear = new Date().getFullYear()
 
 export function Copyright(props) {
     const {
         color,
-        font,
+        fontFamily,
+        fontSize,
+        fontSizeUnit,
+        lineHeight,
+        lineHeightUnit,
+        fontWeight,
+        fontStyle,
         gap,
         hasString,
         text,
         togglePosition,
         yearOption,
         startYear,
-    } = props;
-
-    const fontStyles = useFontControls(props);
+    } = props
 
     const yearDisplay =
-        yearOption === "single" ? currentYear : `${startYear}–${currentYear}`;
+        yearOption === "single" ? currentYear : `${startYear}–${currentYear}`
 
     const containerStyle = {
         width: "100%",
@@ -35,11 +39,15 @@ export function Copyright(props) {
         margin: "0",
         justifyContent: togglePosition === "L" ? "flex-start" : "flex-end",
         color: color,
+        fontFamily: fontFamily,
+        fontSize: `${fontSize}${fontSizeUnit}`,
+        fontWeight: fontWeight,
+        lineHeight: `${lineHeight}${lineHeightUnit}`,
+        fontStyle: fontStyle,
         userSelect: "none",
         gap: hasString ? gap : 0,
         whiteSpace: "nowrap",
-        ...fontStyles,
-    };
+    }
 
     return (
         <div style={containerStyle}>
@@ -58,25 +66,25 @@ export function Copyright(props) {
                 </p>
             )}
         </div>
-    );
+    )
 }
 
 Copyright.defaultProps = {
     color: "#fff",
-    font: {
-        fontFamily: "Manrope",
-        fontSize: 24,
-        fontWeight: "normal",
-        lineHeight: 1.2,
-        letterSpacing: 0,
-    },
+    fontFamily: "Manrope",
+    fontSize: 24,
+    fontSizeUnit: "px",
+    lineHeight: 1.2,
+    lineHeightUnit: "em",
+    fontWeight: "normal",
+    fontStyle: "normal",
     gap: 4,
     hasString: true,
     text: "All rights reserved.",
     togglePosition: "L",
     yearOption: "single",
     startYear: 2018,
-};
+}
 
 addPropertyControls(Copyright, {
     hasString: {
@@ -131,5 +139,57 @@ addPropertyControls(Copyright, {
         title: "Color",
         defaultValue: "#fff",
     },
-    ...fontControls,
-});
+    fontFamily: {
+        type: ControlType.String,
+        title: "Font Family",
+        defaultValue: "Inter",
+    },
+    fontSize: {
+        type: ControlType.Number,
+        title: "Font Size",
+        defaultValue: 24,
+    },
+    fontSizeUnit: {
+        type: ControlType.Enum,
+        title: "Font Size Unit",
+        options: ["px", "em"],
+        defaultValue: "px",
+    },
+    lineHeight: {
+        type: ControlType.Number,
+        title: "Line Height",
+        defaultValue: 1.5,
+    },
+    lineHeightUnit: {
+        type: ControlType.Enum,
+        title: "Line Height Unit",
+        options: ["px", "em", "%"],
+        defaultValue: "em",
+    },
+    fontWeight: {
+        type: ControlType.Enum,
+        title: "Font Weight",
+        options: [
+            "normal",
+            "bold",
+            "bolder",
+            "lighter",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+        ],
+        defaultValue: "normal",
+    },
+    fontStyle: {
+        type: ControlType.Enum,
+        title: "Font Style",
+        options: ["normal", "italic", "oblique"],
+        defaultValue: "normal",
+    },
+})
